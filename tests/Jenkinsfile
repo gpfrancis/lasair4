@@ -2,7 +2,10 @@ pipeline {
     agent any 
     stages {
         stage('Set up python venv') {
-            withPythonEnv('testEnv') {
+            steps {
+                withPythonEnv('testEnv') {
+                    sh 'pip install pyyaml'
+                }
             }
         } 
         stage('Unit Tests') {
