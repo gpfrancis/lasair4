@@ -1,24 +1,19 @@
 pipeline {
     agent any 
     stages {
-        stage('Set up python venv') {
-            steps {
-                withPythonEnv('testEnv') {
-                    sh 'pip install pyyaml'
-                }
-            }
-        } 
+        stage('Set up python env') {
+            sh '''python3 -m venv testenv
+                  source testenv/bin/activate
+                  pip install pyyaml
+               '''
+        }
         stage('Unit Tests') {
-            environment {
-                PYTHONPATH = '../../../../pipeline/sherlock'
-            }
             steps {
-                dir('tests/unit/pipeline/sherlock') {
-                    withPythonEnv('testEnv') {
-                        sh 'python3 --version'
-                        sh 'python3 test_sherlock_wrapper.py'
-                    }
-                }
+                sh '''source
+                      which python
+                      cd tests/unit/pipeline/sherlock
+                      python test_sherlock_wrapper.py
+                   '''
             }
         }
     }
