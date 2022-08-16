@@ -17,11 +17,6 @@ pipeline {
                     }
                 }
             }
-            post {
-                always {
-                    #junit 'tests/test-reports/*.xml'
-                }
-            }
         }
     }
 }
