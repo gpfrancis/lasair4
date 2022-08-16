@@ -5,7 +5,9 @@ pipeline {
             steps {
                 sh '''python3 -m venv testenv
                       source testenv/bin/activate
-                      pip install pyyaml
+                      pip install pyyaml\
+                          confluent-kafka==1.7.0 \
+                          qub-sherlock==2.2.0
                    '''
             }
         }
