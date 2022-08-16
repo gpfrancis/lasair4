@@ -1,13 +1,17 @@
 pipeline {
     agent any 
     stages {
+        stage('Set up python venv') {
+            withPythonEnv('testEnv') {
+            }
+        } 
         stage('Unit Tests') {
             environment {
                 PYTHONPATH = '../../../../pipeline/sherlock'
             }
             steps {
                 dir('tests/unit/pipeline/sherlock') {
-                    withPythonEnv('venv/bin/python3.10') {
+                    withPythonEnv('testEnv') {
                         sh 'python3 --version'
                         sh 'python3 test_sherlock_wrapper.py'
                     }
@@ -15,7 +19,7 @@ pipeline {
             }
             post {
                 always {
-                    junit 'tests/test-reports/*.xml'
+                    #junit 'tests/test-reports/*.xml'
                 }
             }
         }
