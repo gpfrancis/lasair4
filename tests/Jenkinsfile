@@ -11,8 +11,9 @@ pipeline {
         }
         stage('Unit Tests') {
             steps {
-                sh '''source
+                sh '''source testenv/bin/activate
                       which python
+                      python --version
                       cd tests/unit/pipeline/sherlock
                       python test_sherlock_wrapper.py
                    '''
