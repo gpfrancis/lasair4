@@ -3,8 +3,7 @@ import logging
 import sys
 import json
 
-import context
-from sherlock_wrapper import wrapper
+import wrapper
 from confluent_kafka import KafkaError, KafkaException
 
 log = logging.getLogger()

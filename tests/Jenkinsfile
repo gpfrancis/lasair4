@@ -2,6 +2,9 @@ pipeline {
     agent any 
     stages {
         stage('Unit Tests') {
+            environment {
+                PYTHONPATH = '../../../../pipeline/sherlock'
+            }
             steps {
                 dir('tests/unit/pipeline/sherlock') {
                     sh 'python3 test_sherlock_wrapper.py'
@@ -11,11 +14,6 @@ pipeline {
                 always {
                     junit 'tests/test-reports/*.xml'
                 }
-            }
-        }
-        stage('Check python') {
-            steps {
-                sh 'python3 --version'
             }
         }
     }
