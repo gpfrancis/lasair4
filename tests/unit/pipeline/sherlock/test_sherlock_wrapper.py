@@ -3,6 +3,7 @@ import logging
 import sys
 import json
 
+import context
 import wrapper
 from confluent_kafka import KafkaError, KafkaException
 
