@@ -7,7 +7,7 @@ pipeline {
                       source testenv/bin/activate
                       pip install wheel\
                           pyyaml\
-                          confluent-kafka==1.7.0 \
+                          confluent-kafka==1.9.2 \
                           qub-sherlock==2.2.0
                    '''
             }
