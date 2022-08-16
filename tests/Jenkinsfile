@@ -7,7 +7,10 @@ pipeline {
             }
             steps {
                 dir('tests/unit/pipeline/sherlock') {
-                    sh 'python3 test_sherlock_wrapper.py'
+                    withPythonEnv('venv') {
+                        sh 'python3 --version'
+                        sh 'python3 test_sherlock_wrapper.py'
+                    }
                 }
             }
             post {
