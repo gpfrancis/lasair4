@@ -1,21 +1,14 @@
 pipeline {
-    agent any 
-    stages {
-        stage('Set up python env') {
-            steps {
-                sh '''python3 -m venv testenv
-                      source testenv/bin/activate
-                      pip install wheel\
-                          pyyaml\
-                          confluent-kafka==1.9.2 \
-                          qub-sherlock==2.2.0
-                   '''
-            }
+    agent {
+        dockerfile {
+            filename: 'Dockertest'
+            dir: 'tests'
         }
+    } 
+    stages {
         stage('Unit Tests') {
             steps {
-                sh '''source testenv/bin/activate
-                      which python
+                sh '''which python
                       python --version
                       cd tests/unit/pipeline/sherlock
                       python test_sherlock_wrapper.py
