@@ -8,11 +8,7 @@ pipeline {
     stages {
         stage('Unit Tests') {
             steps {
-                sh '''which python
-                      python --version
-                      cd tests/unit/pipeline/sherlock
-                      python test_sherlock_wrapper.py
-                   '''
+                sh 'echo hello'
             }
         }
     }
