@@ -8,7 +8,9 @@ pipeline {
     stages {
         stage('Unit Tests') {
             steps {
-                sh 'echo hello'
+                dir('tests') {
+                    sh 'python3 test_sherlock_wrapper.py'
+                }
             }
         }
     }
