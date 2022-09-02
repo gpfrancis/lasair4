@@ -15,6 +15,7 @@ pipeline {
             post {
                 always {
                     junit 'tests/unit/pipeline/sherlock/test-reports/*.xml'
+                    deleteDir() /* clean up workspace */
                 }
             }
         }
