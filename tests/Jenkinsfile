@@ -14,7 +14,7 @@ pipeline {
             }
             post {
                 always {
-                    junit 'tests/test-reports/*.xml'
+                    junit 'tests/unit/pipeline/sherlock/test-reports/*.xml'
                 }
             }
         }
