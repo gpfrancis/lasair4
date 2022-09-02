@@ -82,7 +82,7 @@ class TestConsumer(unittest.TestCase):
     # test consuming a batch of alerts
     def test_consume_alert_batch(self):
         with unittest.mock.patch('wrapper.classify') as mock_classify:
-            with unittest.mock.patch('sherlock_wrapper.wrapper.produce') as mock_produce:
+            with unittest.mock.patch('wrapper.produce') as mock_produce:
                 with unittest.mock.MagicMock() as mock_kafka_consumer:
                     mock_classify.return_value = 5
                     mock_produce.return_value = 5
@@ -115,8 +115,8 @@ class TestConsumer(unittest.TestCase):
 
     # test that a non-fatal error is non-fatal
     def test_non_fatal_error(self):
-        with unittest.mock.patch('sherlock_wrapper.wrapper.classify') as mock_classify:
-            with unittest.mock.patch('sherlock_wrapper.wrapper.produce') as mock_produce:
+        with unittest.mock.patch('wrapper.classify') as mock_classify:
+            with unittest.mock.patch('wrapper.produce') as mock_produce:
                 with unittest.mock.MagicMock() as mock_kafka_consumer:
                     mock_classify.return_value = 5
                     mock_produce.return_value = 5
@@ -161,8 +161,8 @@ class TestConsumer(unittest.TestCase):
 
     # test (non-fatal) failure on commit
     def test_failed_commit(self):
-        with unittest.mock.patch('sherlock_wrapper.wrapper.classify') as mock_classify:
-            with unittest.mock.patch('sherlock_wrapper.wrapper.produce') as mock_produce:
+        with unittest.mock.patch('wrapper.classify') as mock_classify:
+            with unittest.mock.patch('wrapper.produce') as mock_produce:
                 with unittest.mock.MagicMock() as mock_kafka_consumer:
                     mock_classify.return_value = 5
                     mock_produce.return_value = 5
@@ -247,7 +247,7 @@ class TestClassifier(unittest.TestCase):
             'cache_db':'',
             'sherlock_settings': 'sherlock_test.yaml'
             }
-        with unittest.mock.patch('sherlock_wrapper.wrapper.transient_classifier') as mock_classifier:
+        with unittest.mock.patch('wrapper.transient_classifier') as mock_classifier:
             alerts = [ example_alert_no_ss.copy() ]
             classifications = { "ZTF18aapubnx": "Q" }
             crossmatches = TestClassifier.crossmatches
@@ -278,7 +278,7 @@ class TestClassifier(unittest.TestCase):
             'cache_db':'',
             'sherlock_settings': 'sherlock_test.yaml'
             }
-        with unittest.mock.patch('sherlock_wrapper.wrapper.transient_classifier') as mock_classifier:
+        with unittest.mock.patch('wrapper.transient_classifier') as mock_classifier:
             alerts = [ example_alert_ss.copy() ]
             classifications = { "ZTF18aapubnx": "Q" }
             crossmatches = TestClassifier.crossmatches
@@ -304,7 +304,7 @@ class TestClassifier(unittest.TestCase):
             'cache_db':'',
             'sherlock_settings': 'sherlock_test.yaml'
             }
-        with unittest.mock.patch('sherlock_wrapper.wrapper.transient_classifier') as mock_classifier:
+        with unittest.mock.patch('wrapper.transient_classifier') as mock_classifier:
             alerts = [ example_alert.copy() ]
             classifications = { "ZTF18aapubnx": ["Q", "Descr"] }
             crossmatches = TestClassifier.crossmatches
@@ -326,8 +326,8 @@ class TestClassifier(unittest.TestCase):
             'cache_db':'mysql://user_name:password@localhost:3306/sherlock_cache',
             'sherlock_settings': 'sherlock_test.yaml'
             }
-        with unittest.mock.patch('sherlock_wrapper.wrapper.transient_classifier') as mock_classifier:
-            with unittest.mock.patch('sherlock_wrapper.wrapper.pymysql.connect') as mock_pymysql:
+        with unittest.mock.patch('wrapper.transient_classifier') as mock_classifier:
+            with unittest.mock.patch('wrapper.pymysql.connect') as mock_pymysql:
                 alerts = [ example_alert.copy() ]
                 classifications = { "ZTF18aapubnx": "Q" }
                 crossmatches = [ { 'transient_object_id':"ZTF18aapubnx", 'thing':'foo' } ]
@@ -361,8 +361,8 @@ class TestClassifier(unittest.TestCase):
             'cache_db':'mysql://user_name:password@localhost:3306/sherlock_cache',
             'sherlock_settings': 'sherlock_test.yaml'
             }
-        with unittest.mock.patch('sherlock_wrapper.wrapper.transient_classifier') as mock_classifier:
-            with unittest.mock.patch('sherlock_wrapper.wrapper.pymysql.connect') as mock_pymysql:
+        with unittest.mock.patch('wrapper.transient_classifier') as mock_classifier:
+            with unittest.mock.patch('wrapper.pymysql.connect') as mock_pymysql:
                 alerts = [ example_alert.copy() ]
                 classifications = { "ZTF18aapubnx": "Q" }
                 crossmatches = [ { 'transient_object_id':"ZTF18aapubnx", 'thing':'foo' } ]
@@ -388,8 +388,8 @@ class TestClassifier(unittest.TestCase):
             'cache_db':'mysql://user_name:password@localhost:3306/sherlock_cache',
             'sherlock_settings': 'sherlock_test.yaml'
             }
-        with unittest.mock.patch('sherlock_wrapper.wrapper.transient_classifier') as mock_classifier:
-            with unittest.mock.patch('sherlock_wrapper.wrapper.pymysql.connect') as mock_pymysql:
+        with unittest.mock.patch('wrapper.transient_classifier') as mock_classifier:
+            with unittest.mock.patch('wrapper.pymysql.connect') as mock_pymysql:
                 alerts = [ example_alert.copy() ]
                 classifications = { "ZTF18aapubnx": "Q" }
                 crossmatches = TestClassifier.crossmatches
@@ -427,7 +427,7 @@ class TestProducer(unittest.TestCase):
 
     # test producing a batch of alerts
     def test_produce_alert_batch(self):
-        with unittest.mock.patch('sherlock_wrapper.wrapper.Producer') as mock_kafka_producer:
+        with unittest.mock.patch('wrapper.Producer') as mock_kafka_producer:
             alerts = [ {}, {}, {} ]
             self.assertEqual(len(alerts), 3)
             # should report producing 3 alerts
