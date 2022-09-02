@@ -81,7 +81,7 @@ class TestConsumer(unittest.TestCase):
              
     # test consuming a batch of alerts
     def test_consume_alert_batch(self):
-        with unittest.mock.patch('sherlock_wrapper.wrapper.classify') as mock_classify:
+        with unittest.mock.patch('wrapper.classify') as mock_classify:
             with unittest.mock.patch('sherlock_wrapper.wrapper.produce') as mock_produce:
                 with unittest.mock.MagicMock() as mock_kafka_consumer:
                     mock_classify.return_value = 5
