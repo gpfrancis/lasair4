@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Unit Tests') {
             steps {
-                dir('tests') {
+                dir('tests/unit/pipeline/sherlock') {
                     sh 'python3 test_sherlock_wrapper.py'
                 }
             }
