@@ -7,6 +7,8 @@ republishes on the output topic.
 
 __version__ = "0.6.0"
 
+import asdfasdfewsd
+
 import warnings
 import json
 import yaml
